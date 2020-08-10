@@ -1,5 +1,3 @@
-console.log('Client side javascript loaded!')
-
 const url = 'http://localhost:3000/weather?address='
 
 
