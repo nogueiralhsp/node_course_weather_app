@@ -25,7 +25,7 @@ const forecast = (latitude,longitude,unit,callback) =>{
          } else if (body.error){
              callback(body.error,undefined)
          } else {
-                const message = 'Weather is '+ body.current.weather_descriptions[0]+'. It is currently '+body.current.temperature+' \xB0C out. Fells like '+body.current.feelslike+'\xB0C. There is a chance of'+body.current.precip+'% of rain. Pressure at the moment is '+body.current.pressure +'. Humidity is '+body.current.humidity+'.'
+                const message = 'Weather is '+ body.current.weather_descriptions[0]+'. It is currently '+body.current.temperature+' \xB0C out. Fells like '+body.current.feelslike+'\xB0C. There is a chance of '+body.current.precip+'% of rain. Pressure at the moment is '+body.current.pressure +'. Humidity is '+body.current.humidity+'.'
                 callback(undefined,message)
          }
      })
