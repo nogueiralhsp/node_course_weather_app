@@ -1,4 +1,4 @@
-const url = '/weather?address='
+const url = ' /weather?address='
 
 
 

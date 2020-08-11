@@ -3,7 +3,7 @@ body {
      font-family: Arial;
      max-width: 650px;
      margin: 0 auto;
-     padding: 0 20px;
+     padding: 0 10px;
 
      display: flex;
      flex-direction: column;
@@ -12,7 +12,7 @@ body {
 }
 
 .main-content{
-     color: #333333;
+     color: #db1414;
      flex-grow: 1;
 }
 
