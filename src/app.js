@@ -83,7 +83,7 @@ app.get('/weather', (req,res) => {
 
 app.get('/direction', (req,res) => {
      res.render ('direction',{
-          title: 'About Me',
+          title: 'Directions',
           name: 'Henrique Nogueira'
 
      })
