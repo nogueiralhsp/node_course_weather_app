@@ -17,6 +17,15 @@ body {
      flex-grow: 1;
 }
 
+
+.spectialTxt {
+     color: #1b1717;
+     font-style: italic;
+     font-size: large;
+     margin-top: 16px;
+     padding: 16px 0;
+}
+
 footer{
      color: #888888;
      border-top: 1px solid #bebbbb;

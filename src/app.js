@@ -81,6 +81,15 @@ app.get('/weather', (req,res) => {
 
 })
 
+app.get('/direction', (req,res) => {
+     res.render ('direction',{
+          title: 'About Me',
+          name: 'Henrique Nogueira'
+
+     })
+
+})
+
 app.get('/products', (req, res)=>{
 
      if(!req.query.search){
