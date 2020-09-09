@@ -108,6 +108,7 @@ app.get('/help', (req,res) => {
      res.render ('help',{
           title: 'Help',
           helpText:"don't folow me, I'm lost too || just for now =)",
+          tipText:'perheps you want to go to directions page?',
           name: 'Henrique Nogueira'
      })
 
