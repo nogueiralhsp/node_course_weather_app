@@ -13,6 +13,7 @@
   "dependencies": {
     "express": "^4.16.4",
     "hbs": "^4.1.1",
+    "ini": "^2.0.0",
     "postman-request": "^2.88.1-postman.24"
   },
   "devDependencies": {
