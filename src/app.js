@@ -9,41 +9,60 @@ const forecast = require('./utils/forecast')
 const express = require('express')
 const hbs = require('hbs')
 
-const app = express ()
+const app = express()
 
 //this allow crossdomain use
-app.use(allowCrossDomain)
+var allowCrossDomain = function (req, res, next) {
+     res.header('Access-Control-Allow-Origin', '*');
+     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+     // intercept OPTIONS method
+     if ('OPTIONS' == req.method) {
+          res.send(200);
+     }
+     else {
+          next();
+     }
+};
+
+
+
+app.use(allowCrossDomain);
+
 
 
 const port = process.env.PORT || 3000
 
 
 //Define paths for express config
-const publicDirectoryPath = path.join(__dirname,'../public')
-const viewsPath = path.join(__dirname,'../templates/views')
-const partialsPath = path.join(__dirname,'../templates/partials')
+const publicDirectoryPath = path.join(__dirname, '../public')
+const viewsPath = path.join(__dirname, '../templates/views')
+const partialsPath = path.join(__dirname, '../templates/partials')
 // __dirname is the path where the app.js lives in!!!
-
-
-//Setup handlebars engine and views location
-app.set('view engine', 'hbs')
-app.set('views',viewsPath)
-hbs.registerPartials(partialsPath)
 
 //Setup static directory to server
 app.use(express.static(publicDirectoryPath))
 
 
-app.get('',(req,res) =>{
-     res.render('index',{
+//Setup handlebars engine and views location
+app.set('view engine', 'hbs')
+app.set('views', viewsPath)
+hbs.registerPartials(partialsPath)
+
+
+
+
+app.get('', (req, res) => {
+     res.render('index', {
           title: 'Weather',
           name: 'Henrique Nogueira'
      })
 })
 
 
-app.get('/about', (req,res) => {
-     res.render ('about',{
+app.get('/about', (req, res) => {
+     res.render('about', {
           title: 'About Me',
           name: 'Henrique Nogueira'
 
@@ -51,31 +70,31 @@ app.get('/about', (req,res) => {
 
 })
 
-app.get('/weather', (req,res) => {
+app.get('/weather', (req, res) => {
 
-     if (!req.query.address){
-          return res.send ({
+     if (!req.query.address) {
+          return res.send({
                error: 'You must provide a search term'
           })
      }
 
-     geocode (req.query.address, ( error,{longitude,latitude,location} ={})=>{
-          if(error){
-               return res.send({error})
+     geocode(req.query.address, (error, { longitude, latitude, location } = {}) => {
+          if (error) {
+               return res.send({ error })
           }
-     
-          forecast(latitude,longitude, 'm',(error,forecastData) => {
-               if (error) { 
-                    return res.send ({error})
+
+          forecast(latitude, longitude, 'm', (error, forecastData) => {
+               if (error) {
+                    return res.send({ error })
                }
 
                res.send({
                     forecastData,
                     location,
-                    address:req.query.address
+                    address: req.query.address
                })
           })
-     
+
      })
 
      // res.send ({
@@ -86,8 +105,8 @@ app.get('/weather', (req,res) => {
 
 })
 
-app.get('/direction', (req,res) => {
-     res.render ('direction',{
+app.get('/direction', (req, res) => {
+     res.render('direction', {
           title: 'Directions',
           name: 'Henrique Nogueira'
 
@@ -95,9 +114,9 @@ app.get('/direction', (req,res) => {
 
 })
 
-app.get('/products', (req, res)=>{
+app.get('/products', (req, res) => {
 
-     if(!req.query.search){
+     if (!req.query.search) {
           return res.send({
                error: 'You must provide a search term'
           })
@@ -105,29 +124,29 @@ app.get('/products', (req, res)=>{
 
 
      res.send({
-          product:[]
+          product: []
      })
 })
 
-app.get('/help', (req,res) => {
-     res.render ('help',{
+app.get('/help', (req, res) => {
+     res.render('help', {
           title: 'Help',
-          helpText:"don't folow me, I'm lost too || just for now =)",
-          tipText:'perheps you want to go to directions page?',
+          helpText: "don't folow me, I'm lost too || just for now =)",
+          tipText: 'perheps you want to go to directions page?',
           name: 'Henrique Nogueira'
      })
 
 })
-app.get ('/help/*',(req, res)=>{
-     res.render('404',{
+app.get('/help/*', (req, res) => {
+     res.render('404', {
           title: '404',
           errorMessage: 'Help article not found.',
           name: 'Henrique Nogueira'
      })
 })
 
-app.get ('*',(req, res)=>{
-     res.render('404',{
+app.get('*', (req, res) => {
+     res.render('404', {
           title: '404',
           errorMessage: 'Page not found.',
           name: 'Henrique Nogueira'
@@ -136,6 +155,6 @@ app.get ('*',(req, res)=>{
 
 app.listen(port, () => { //localhost:3000
 
-console.log('Server is up on port 3000\nlocalhost:'+port)
+     console.log('Server is up on port 3000\nlocalhost:' + port)
 
 })
