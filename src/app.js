@@ -10,6 +10,11 @@ const express = require('express')
 const hbs = require('hbs')
 
 const app = express ()
+
+//this allow crossdomain use
+app.use(allowCrossDomain)
+
+
 const port = process.env.PORT || 3000
 
 
